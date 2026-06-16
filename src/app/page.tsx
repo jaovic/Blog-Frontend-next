@@ -29,9 +29,9 @@ export default async function HomePage() {
       ) : (
         <div className="space-y-4">
           {posts.map((post) => (
-            <article key={post.id} className="relative bg-white rounded-xl border border-slate-200 p-6 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
+            <article key={post.id} className="relative bg-white rounded-xl border border-slate-200 p-5 sm:p-6 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
               <Link href={`/posts/${post.id}`} className="absolute inset-0 rounded-xl" aria-label={post.title} />
-              <h2 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 transition-colors">
                 {post.title}
               </h2>
               <p className="text-slate-600 mt-2 text-sm leading-relaxed line-clamp-2">{post.content}</p>
