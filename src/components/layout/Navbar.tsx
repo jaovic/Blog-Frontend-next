@@ -54,12 +54,17 @@ export default function Navbar({ session }: NavbarProps) {
               </button>
             </>
           ) : (
-            <button
-              onClick={() => signIn("keycloak")}
-              className="text-sm bg-blue-500 hover:bg-blue-400 text-white font-medium px-4 py-1.5 rounded-md transition-colors"
-            >
-              Entrar
-            </button>
+            <>
+              <Link href="/register" className="text-sm text-slate-300 hover:text-white transition-colors">
+                Criar conta
+              </Link>
+              <button
+                onClick={() => signIn("keycloak")}
+                className="text-sm bg-blue-500 hover:bg-blue-400 text-white font-medium px-4 py-1.5 rounded-md transition-colors"
+              >
+                Entrar
+              </button>
+            </>
           )}
         </div>
 
@@ -100,12 +105,21 @@ export default function Navbar({ session }: NavbarProps) {
                 </button>
               </div>
             ) : (
-              <button
-                onClick={() => { signIn("keycloak"); setOpen(false) }}
-                className="w-full text-sm bg-blue-500 hover:bg-blue-400 text-white font-medium px-4 py-2 rounded-md transition-colors"
-              >
-                Entrar
-              </button>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/register"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-slate-300 hover:text-white transition-colors py-1"
+                >
+                  Criar conta
+                </Link>
+                <button
+                  onClick={() => { signIn("keycloak"); setOpen(false) }}
+                  className="w-full text-sm bg-blue-500 hover:bg-blue-400 text-white font-medium px-4 py-2 rounded-md transition-colors"
+                >
+                  Entrar
+                </button>
+              </div>
             )}
           </div>
         </div>
