@@ -10,6 +10,7 @@ const geist = Geist({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Blog Platform",
   description: "Plataforma de blog multi-autor",
+  icons: { icon: "/favicon.ico" },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
