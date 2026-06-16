@@ -54,14 +54,21 @@ export default async function DashboardPage() {
       ) : (
         <div className="space-y-3">
           {posts.map((post) => (
-            <div key={post.id} className="bg-white rounded-xl border border-slate-200 p-5 flex items-center justify-between hover:border-slate-300 transition-colors">
+            <div
+              key={post.id}
+              className="relative bg-white rounded-xl border border-slate-200 p-5 flex items-center justify-between hover:border-slate-300 hover:shadow-sm transition-all cursor-pointer"
+            >
+              {/* overlay que torna o card inteiro clicável */}
+              <Link href={`/posts/${post.id}`} className="absolute inset-0 rounded-xl" aria-label={post.title} />
+
               <div>
                 <h2 className="font-semibold text-slate-900">{post.title}</h2>
                 <p className="text-xs text-slate-400 mt-1 font-medium">
                   Atualizado em {new Date(post.updated_at).toLocaleDateString("pt-PT")}
                 </p>
               </div>
-              <div className="flex items-center gap-3">
+
+              <div className="relative z-10 flex items-center gap-3">
                 <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${STATUS_COLOR[post.status]}`}>
                   {STATUS_LABEL[post.status]}
                 </span>
