@@ -20,7 +20,7 @@ export default async function AdminUsersPage() {
     <div>
       <div className="mb-8 pb-6 border-b border-slate-200">
         <h1 className="text-3xl font-bold text-slate-900">Utilizadores</h1>
-        <p className="text-slate-500 mt-1 text-sm">Gestão de utilizadores e roles</p>
+        <p className="text-slate-500 mt-1 text-sm">Gestão de utilizadores e roles — clica nas pills para atribuir ou remover</p>
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
@@ -30,30 +30,27 @@ export default async function AdminUsersPage() {
               <th className="text-left px-5 py-3.5 font-semibold text-slate-700">Utilizador</th>
               <th className="text-left px-5 py-3.5 font-semibold text-slate-700">Email</th>
               <th className="text-left px-5 py-3.5 font-semibold text-slate-700">Roles</th>
-              <th className="text-left px-5 py-3.5 font-semibold text-slate-700">Atribuir role</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
-            {users.map((user) => (
-              <tr key={user.id} className="hover:bg-slate-50 transition-colors">
-                <td className="px-5 py-4 font-semibold text-slate-900">{user.username}</td>
-                <td className="px-5 py-4 text-slate-600">{user.email}</td>
-                <td className="px-5 py-4">
-                  <div className="flex flex-wrap gap-1">
-                    {(user.roles ?? [])
-                      .filter(r => ["author", "editor", "admin"].includes(r))
-                      .map(role => (
-                        <span key={role} className="bg-blue-100 text-blue-800 border border-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                          {role}
-                        </span>
-                      ))}
-                  </div>
-                </td>
-                <td className="px-5 py-4">
-                  <RoleManager userId={user.id} token={session?.accessToken as string} />
-                </td>
-              </tr>
-            ))}
+            {users.map((user) => {
+              const userRoles = (user.roles ?? []).filter(r =>
+                ["author", "editor", "admin"].includes(r)
+              )
+              return (
+                <tr key={user.id} className="hover:bg-slate-50 transition-colors">
+                  <td className="px-5 py-4 font-semibold text-slate-900">{user.username}</td>
+                  <td className="px-5 py-4 text-slate-600">{user.email}</td>
+                  <td className="px-5 py-4">
+                    <RoleManager
+                      userId={user.id}
+                      token={session?.accessToken as string}
+                      currentRoles={userRoles}
+                    />
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
