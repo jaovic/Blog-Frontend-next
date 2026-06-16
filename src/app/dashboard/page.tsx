@@ -75,8 +75,7 @@ export default async function DashboardPage() {
                 {post.status === "draft" && (
                   <Link
                     href={`/dashboard/posts/${post.id}`}
-                    className="text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
+                    className="relative z-10 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
                   >
                     Editar
                   </Link>
