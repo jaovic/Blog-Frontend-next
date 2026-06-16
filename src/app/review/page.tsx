@@ -31,10 +31,10 @@ export default async function ReviewPage() {
       ) : (
         <div className="space-y-4">
           {posts.map((post) => (
-            <div key={post.id} className="bg-white rounded-xl border border-amber-200 p-6">
-              <div className="flex items-start justify-between mb-3">
-                <h2 className="text-xl font-bold text-slate-900">{post.title}</h2>
-                <span className="text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 px-2.5 py-1 rounded-full ml-3 shrink-0">
+            <div key={post.id} className="bg-white rounded-xl border border-amber-200 p-5 sm:p-6">
+              <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900">{post.title}</h2>
+                <span className="text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 px-2.5 py-1 rounded-full shrink-0">
                   Em revisão
                 </span>
               </div>
