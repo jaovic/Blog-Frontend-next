@@ -1,10 +1,16 @@
-import { api } from "@/lib/api"
+import { auth } from "@/lib/auth"
+import { api, authApi } from "@/lib/api"
 import { Post } from "@/types"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-async function getPost(id: string): Promise<Post | null> {
+async function getPost(id: string, token?: string): Promise<Post | null> {
   try {
+    // tenta com auth primeiro (para o autor ver os seus drafts/pending)
+    if (token) {
+      const { data } = await authApi(token).get(`/posts/${id}`)
+      return data
+    }
     const { data } = await api.get(`/posts/${id}`)
     return data
   } catch {
@@ -14,7 +20,8 @@ async function getPost(id: string): Promise<Post | null> {
 
 export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const post = await getPost(id)
+  const session = await auth()
+  const post = await getPost(id, session?.accessToken)
 
   if (!post) return notFound()
 

@@ -72,6 +72,15 @@ export default async function DashboardPage() {
                 <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${STATUS_COLOR[post.status]}`}>
                   {STATUS_LABEL[post.status]}
                 </span>
+                {post.status === "draft" && (
+                  <Link
+                    href={`/dashboard/posts/${post.id}`}
+                    className="text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Editar
+                  </Link>
+                )}
                 <PostActions
                   postId={post.id}
                   status={post.status}
